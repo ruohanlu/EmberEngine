@@ -1,0 +1,8 @@
+[submodule "EMber/vendor/spdlog"]
+	path = Ember/vendor/spdlog
+	url = ../../gabime/spdlog.git
+	branch = v1.x
+[submodule "Ember/vendor/GLFW"]
+	path = Ember/vendor/GLFW
+	url = ../../TheCherno/glfw.git
+	branch = master

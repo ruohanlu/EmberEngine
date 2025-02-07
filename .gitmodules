@@ -4,3 +4,9 @@
 [submodule "Ember/Ember/vendor/glfw"]
 	path = Ember/Ember/vendor/glfw
 	url = https://github.com/TheCherno/glfw
+[submodule "Ember/vendor/imgui"]
+	path = Ember/vendor/imgui
+	url = https://github.com/TheCherno/imgui
+[submodule "Ember/EMber/vendor/imgui"]
+	path = Ember/EMber/vendor/imgui
+	url = https://github.com/TheCherno/imgui

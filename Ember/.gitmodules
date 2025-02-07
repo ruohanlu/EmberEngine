@@ -6,3 +6,6 @@
 	path = Ember/vendor/GLFW
 	url = ../../TheCherno/glfw.git
 	branch = master
+[submodule "Ember/vendor/imgui"]
+	path = Ember/vendor/imgui
+	url = https://github.com/TheCherno/imgui

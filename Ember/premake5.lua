@@ -1,12 +1,14 @@
 workspace "Ember"
-	architecture "x64"
+architecture "x64"
 
-	configurations
-	{
-		"Debug",
-		"Release",
-		"Dist"
-	}
+startproject "Sandbox"
+
+configurations
+{
+	"Debug",
+	"Release",
+	"Dist"
+}
 
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
@@ -14,120 +16,127 @@ outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 IncludeDir = {}
 IncludeDir["GLFW"] = "Ember/vendor/GLFW/include"
 IncludeDir["GLAD"] = "Ember/vendor/GLAD/include"
+IncludeDir["ImGui"] = "Ember/vendor/imgui"
 
-include "Ember/vendor/GLFW"
-include "Ember/vendor/GLAD"
+group "Dependencies"
+	include "Ember/vendor/GLFW"
+	include "Ember/vendor/GLAD"
+	include "Ember/vendor/imgui"
+
+group ""
 
 project "Ember"
-	location "Ember"
-	kind "SharedLib"
-	language "C++"
+location "Ember"
+kind "SharedLib"
+language "C++"
+staticruntime "off"
 
-	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
-	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
+targetdir("bin/" .. outputdir .. "/%{prj.name}")
+objdir("bin-int/" .. outputdir .. "/%{prj.name}")
 
-	pchheader "ebpch.h"
-	pchsource "Ember/src/ebpch.cpp"
+pchheader "ebpch.h"
+pchsource "Ember/src/ebpch.cpp"
 
-	files
-	{
-		"%{prj.name}/src/**.h",
-		"%{prj.name}/src/**.cpp"
-	}
+files
+{
+	"%{prj.name}/src/**.h",
+	"%{prj.name}/src/**.cpp"
+}
 
-	includedirs
-	{
-		"%{prj.name}/src",
-		"%{prj.name}/vendor/spdlog/include",
-		"%{IncludeDir.GLFW}",
-		"%{IncludeDir.GLAD}"
-	}
+includedirs
+{
+	"%{prj.name}/src",
+	"%{prj.name}/vendor/spdlog/include",
+	"%{IncludeDir.GLFW}",
+	"%{IncludeDir.GLAD}",
+	"%{IncludeDir.ImGui}"
+}
 
-	links 
-	{ 
-		"GLFW",
-		"GLAD",
-		"opengl32.lib"
-	}
+links
+{
+	"GLFW",
+	"GLAD",
+	"ImGui",
+	"opengl32.lib"
+}
 
-	filter "system:windows"
-		cppdialect "C++17"
-		staticruntime "On"
-		systemversion "latest"
+filter "system:windows"
+cppdialect "C++17"
+systemversion "latest"
 
-		defines
-		{
-			"EB_PLATFORM_WINDOWS",
-			"EB_BUILD_DLL",
-			"GLFW_INCLUDE_NONE"
-		}
+defines
+{
+	"EB_PLATFORM_WINDOWS",
+	"EB_BUILD_DLL",
+	"GLFW_INCLUDE_NONE"
+}
 
-		postbuildcommands
-		{
-			("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/Sandbox")
-		}
+postbuildcommands
+{
+	("{COPY} %{cfg.buildtarget.relpath} \"../bin/" .. outputdir .. "/Sandbox/\"")
+}
 
-	filter "configurations:Debug"
-		defines "EB_DEBUG"
-		buildoptions "/MDd"
-		symbols "On"
+filter "configurations:Debug"
+defines "EB_DEBUG"
+runtime "Debug"
+symbols "On"
 
-	filter "configurations:Release"
-		defines "EB_RELEASE"
-		buildoptions "/MD"
-		optimize "On"
+filter "configurations:Release"
+defines "EB_RELEASE"
+runtime "Release"
+optimize "On"
 
-	filter "configurations:Dist"
-		defines "EB_DIST"
-		buildoptions "/MD"
-		optimize "On"
+filter "configurations:Dist"
+defines "EB_DIST"
+runtime "Release"
+optimize "On"
 
 project "Sandbox"
-	location "Sandbox"
-	kind "ConsoleApp"
-	language "C++"
+location "Sandbox"
+kind "ConsoleApp"
+language "C++"
+staticruntime "off"
 
-	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
-	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
+targetdir("bin/" .. outputdir .. "/%{prj.name}")
+objdir("bin-int/" .. outputdir .. "/%{prj.name}")
 
-	files
-	{
-		"%{prj.name}/src/**.h",
-		"%{prj.name}/src/**.cpp"
-	}
+files
+{
+	"%{prj.name}/src/**.h",
+	"%{prj.name}/src/**.cpp"
+}
 
-	includedirs
-	{
-		"Ember/vendor/spdlog/include",
-		"Ember/src"
-	}
+includedirs
+{
+	"Ember/vendor/spdlog/include",
+	"Ember/src"
+}
 
-	links
-	{
-		"Ember"
-	}
+links
+{
+	"Ember"
+}
 
-	filter "system:windows"
-		cppdialect "C++17"
-		staticruntime "On"
-		systemversion "latest"
+filter "system:windows"
+cppdialect "C++17"
+systemversion "latest"
 
-		defines
-		{
-			"EB_PLATFORM_WINDOWS"
-		}
+defines
+{
+	"EB_PLATFORM_WINDOWS"
+}
 
-	filter "configurations:Debug"
-		defines "EB_DEBUG"
-		buildoptions "/MDd"
-		symbols "On"
+filter "configurations:Debug"
+defines "EB_DEBUG"
+runtime "Debug"
+symbols "On"
 
-	filter "configurations:Release"
-		defines "EB_RELEASE"
-		buildoptions "/MD"
-		optimize "On"
+filter "configurations:Release"
+defines "EB_RELEASE"
+runtime "Release"
+optimize "On"
 
-	filter "configurations:Dist"
-		defines "EB_DIST"
-		buildoptions "/MD"
-		optimize "On"
+filter "configurations:Dist"
+defines "EB_DIST"
+runtime "Release"
+optimize "On"

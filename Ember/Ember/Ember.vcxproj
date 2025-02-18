@@ -593,6 +593,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Ember\Application.cpp" />
+    <ClCompile Include="src\Ember\ImGui\ImGuiBuild.cpp" />
     <ClCompile Include="src\Ember\ImGui\ImGuiLayer.cpp" />
     <ClCompile Include="src\Ember\Layer.cpp" />
     <ClCompile Include="src\Ember\LayerStack.cpp" />

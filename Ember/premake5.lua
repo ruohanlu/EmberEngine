@@ -17,6 +17,7 @@ IncludeDir = {}
 IncludeDir["GLFW"] = "Ember/vendor/GLFW/include"
 IncludeDir["GLAD"] = "Ember/vendor/GLAD/include"
 IncludeDir["ImGui"] = "Ember/vendor/imgui"
+IncludeDir["glm"] = "Ember/vendor/glm"
 
 group "Dependencies"
 	include "Ember/vendor/GLFW"
@@ -40,7 +41,9 @@ pchsource "Ember/src/ebpch.cpp"
 files
 {
 	"%{prj.name}/src/**.h",
-	"%{prj.name}/src/**.cpp"
+	"%{prj.name}/src/**.cpp",
+	"%{prj.name}/vendor/glm/glm/**.hpp",
+	"%{prj.name}/vendor/glm/glm/**.inl",
 }
 
 includedirs
@@ -49,7 +52,8 @@ includedirs
 	"%{prj.name}/vendor/spdlog/include",
 	"%{IncludeDir.GLFW}",
 	"%{IncludeDir.GLAD}",
-	"%{IncludeDir.ImGui}"
+	"%{IncludeDir.ImGui}",
+	"%{IncludeDir.glm}"
 }
 
 links
@@ -109,7 +113,9 @@ files
 includedirs
 {
 	"Ember/vendor/spdlog/include",
-	"Ember/src"
+	"Ember/src",
+	"Ember/vendor",
+	"%{IncludeDir.glm}"
 }
 
 links

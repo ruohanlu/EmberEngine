@@ -152,6 +152,7 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\Platform\OpenGL\OpenGLContext.h" />
     <ClInclude Include="src\Ember.h" />
     <ClInclude Include="src\Ember\Application.h" />
     <ClInclude Include="src\Ember\Core.h" />
@@ -166,6 +167,7 @@
     <ClInclude Include="src\Ember\LayerStack.h" />
     <ClInclude Include="src\Ember\Log.h" />
     <ClInclude Include="src\Ember\MouseButtonCodes.h" />
+    <ClInclude Include="src\Ember\Renderer\GraphicsContext.h" />
     <ClInclude Include="src\Ember\Window.h" />
     <ClInclude Include="src\Ember\input.h" />
     <ClInclude Include="src\Platform\OpenGL\ImGuiOpenGLRenderer.h" />
@@ -592,6 +594,7 @@
     <ClInclude Include="vendor\glm\glm\vector_relational.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Platform\OpenGL\OpenGLContext.cpp" />
     <ClCompile Include="src\Ember\Application.cpp" />
     <ClCompile Include="src\Ember\ImGui\ImGuiBuild.cpp" />
     <ClCompile Include="src\Ember\ImGui\ImGuiLayer.cpp" />
